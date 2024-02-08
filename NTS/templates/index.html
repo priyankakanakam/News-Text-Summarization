@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>News Text Summarization</title>
+</head>
+<body>
+    <div class="container">
+        <h1>News Text Summarization</h1>
+        <div class="input-container">
+            <label for="urlInput">Enter URL:<input type="text" id="urlInput" placeholder="https://example.com"></label>
+
+            <!-- Modified part -->
+            <p>Enter Text</p>
+            <div style="display: flex; justify-content: center;">
+                <textarea id="inputText" style="width: 45%; height: 300px; resize: none;" placeholder="Enter text here..."></textarea>
+                <textarea id="outputText" style="width: 45%; height: 300px; resize: none;" readonly placeholder="Summarized text"></textarea>
+            </div>
+
+
+            <div style="display: flex; justify-content: center;">
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            var url = document.getElementById("urlInput").value;
+            var text = document.getElementById("inputText").value; // Retrieve input text
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/setNewsText");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("outputText").value = response.summary;
+                }
+            };
+            if (url !== "") { // Check if URL input is provided
+                xhr.send(JSON.stringify({ url: url }));
+            } else if (text !== "") { // If URL input is empty, use entered text
+                xhr.send(JSON.stringify({ text: text }));
+            } else {
+                alert("Please enter a URL or text to summarize.");
+            }
+        }
+    </script>
+</body>
+</html>
