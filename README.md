@@ -9,54 +9,34 @@ This project demonstrates News Text Summarization using a combination of TextRan
 The following Python libraries are used in this project:
 
 - `nltk`: Natural Language Toolkit for text processing.
-- `rank_bm25`: Implementation of BM25 algorithm for information retrieval.
 - `numpy`: Numerical computing library for array operations.
 - `networkx`: Library for creating and manipulating graphs.
-- `seaborn`: Data visualization library based on Matplotlib.
 
 Ensure that these libraries are installed before running the code.
 
 ```bash
-pip install nltk rank_bm25 numpy networkx seaborn
+pip install nltk numpy networkx seaborn
 ```
 
 ## Usage
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/News-Summarization.git
-cd News-Summarization
-```
-
-2. Run the `summarize.py` script:
-
-```bash
-python summarize.py
-```
-
-3. Input your news text when prompted, and the program will generate a summary using the TextRank algorithm with an ensemble technique of cosine and BM25 similarity scores.
-
-## Code Structure
-
-- `summarize.py`: Main script for news text summarization.
-- `text_rank.py`: Module containing TextRank algorithm implementation.
-- `bm25_similarity.py`: Module containing BM25 similarity calculation.
-- `ensemble_similarity.py`: Module for combining cosine and BM25 similarity scores.
-- `utils.py`: Utility functions for text preprocessing and graph creation.
+Input your url or news text when prompted, and the program will generate a summary using the TextRank algorithm with an ensemble technique of cosine and BM25 similarity scores.
 
 ## Algorithm Overview
 
 1. **TextRank Algorithm:**
    - Extracts important sentences from the news text based on sentence similarity in a graph representation.
+  
+2. **Cosine Similarity:**
+   - Calculates similarity scores between sentences using the cosine algorithm.
 
-2. **BM25 Similarity:**
+3. **BM25 Similarity:**
    - Calculates similarity scores between sentences using the BM25 algorithm.
 
-3. **Ensemble Technique:**
+4. **Ensemble Technique:**
    - Combines cosine and BM25 similarity scores through averaging.
 
-4. **Summary Generation:**
+5. **Summary Generation:**
    - Ranks sentences using the ensemble similarity matrix and selects the top sentences for the summary.
 
 ## Results
